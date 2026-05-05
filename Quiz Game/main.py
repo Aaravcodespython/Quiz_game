@@ -10,7 +10,6 @@ HEIGHT = 650
 score = 0
 time_left = 10
 game_over = False
-marquee_message = "Welcome to Quiz Game!"
 question_count = 0
 question_index = 0
 file_name = "questions.txt"
@@ -51,8 +50,35 @@ def draw():
     screen.draw.filled_rect(skip_box, color="blue")
 
     #adding texts on rectangles
-    marquee_message += f" Q: {question_index} out of {question_count}"
+    marquee_message = "Welcome to Quiz Game!"
+    marquee_message = marquee_message + f" Q: {question_index} out of {question_count}"
     screen.draw.textbox(marquee_message, marquee_box, color="white")
-    screen.draw.textbox(str(time_left), timer_box, color="white", shadow=(0.5,0.5), scolor = "black")
+    screen.draw.textbox(str(time_left), timer_box, color="white", shadow=(0.5,0.5), scolor="black")
+    screen.draw.textbox("Skip",skip_box, color="white", shadow=(0.5,0.5), scolor="black", angle=-45)
+
+def move_marquee():
+    marquee_box.x -= 2
+
+    if marquee_box.right < 0:
+        marquee_box.left = WIDTH
+
+def update():
+    move_marquee()
+
+def read_question_file():
+    global question_count, questions
+    
+    #open the file for reading
+    qfile = open("questions.txt",mode="r")
+    for line in qfile:
+        questions.append(line)
+        question_count += 1
+    qfile.close()
+
+def read_next_question():
+    global question_index, questions
+
+read_question_file()
+print(questions)
 
 pgzrun.go()
