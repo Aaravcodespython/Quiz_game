@@ -9,11 +9,12 @@ HEIGHT = 650
 
 score = 0
 time_left = 10
-game_over = False
+is_game_over = False
 question_count = 0
 question_index = 0
 file_name = "questions.txt"
-questions = []
+question_set = []
+score = 0
 
 #creating the rectangles
 marquee_box = Rect(0,0,870,80)
@@ -55,6 +56,14 @@ def draw():
     screen.draw.textbox(marquee_message, marquee_box, color="white")
     screen.draw.textbox(str(time_left), timer_box, color="white", shadow=(0.5,0.5), scolor="black")
     screen.draw.textbox("Skip",skip_box, color="white", shadow=(0.5,0.5), scolor="black", angle=-45)
+    screen.draw.textbox(one_question_set[0].strip(), question_box, color="brown")
+    
+    index = 1
+
+    for box in answer_boxes:
+        screen.draw.textbox(one_question_set[index].strip(), box, color="navy")
+        index += 1
+
 
 def move_marquee():
     marquee_box.x -= 2
@@ -66,19 +75,48 @@ def update():
     move_marquee()
 
 def read_question_file():
-    global question_count, questions
+    global question_count, question_set
     
     #open the file for reading
     qfile = open("questions.txt",mode="r")
     for line in qfile:
-        questions.append(line)
+        question_set.append(line)
         question_count += 1
     qfile.close()
 
 def read_next_question():
-    global question_index, questions
+    global question_index, question_set
+
+    #take the top question to be shown on the screen and remove it from the question_set list
+    question_set_to_show = question_set.pop(0)
+    question_index += 1
+    
+    #Each comma will break the sentence into a list using , as a criteria for the function
+    return question_set_to_show.split(",")
+
+def update_time_left():
+    global time_left
+
+    if time_left > 0:
+        time_left -= 1
+        
+    else:
+        game_over()
+
+def game_over():
+    global time_left, one_question_set, is_game_over
+
+    is_game_over = True
+    one_question_set = [f"Game Over, you scored {score} out of {question_count}","----------","----------","----------","----------",5]
+    time_left = 0
+
+def on_mouse_down(pos):
+    index = 1
+    
+    #we are interested with the answers and not the question and the first answer is index number 1
 
 read_question_file()
-print(questions)
+one_question_set = read_next_question()
+clock.schedule_interval(update_time_left,1)
 
 pgzrun.go()
