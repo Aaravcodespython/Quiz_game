@@ -10,3 +10,11 @@ Which planet is known as the red planet?,Venus,Mars,Earth,Jupitar,2
 Which part of the body continue to grow for your entire life?,Brain,Teeth,Nose,Eyes,3
 Which first electrical item did Thomas Edision invent?,Rice cooker,Lightbulb,Hair Dryer,Fan,2
 What is the smallest country in the world?,Switzerland,Monaco,Vatican City,England,3 
+What is the best selling videogame?,Minecraft,Terraria,Roblox,Fortnite,1
+What is the most popular programming language?,C++,Python,JavaScript,Lua,2
+How many people live in the world(billions)?,~9,~7,~10,~8,4
+What is the richest country in the world(PCI)?,Liechenstein,USA,Luxembourg,Switzerland,1
+How many planets are in the Solar System?,10,8,9,7,2
+Which shape has 10 sides? Hexagon,Nonagon,Octagon,Decagon,4
+How many days are in a year?,354,378,365,333,3
+Which layer of the atmosphere do planes travel?,Stratosphere,Thermosphere,Exosphere,Troposphere,1
