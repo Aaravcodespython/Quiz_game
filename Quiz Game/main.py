@@ -112,8 +112,23 @@ def game_over():
 
 def on_mouse_down(pos):
     index = 1
-    
     #we are interested with the answers and not the question and the first answer is index number 1
+    for box in answer_boxes:
+        if box.collidepoint(pos):
+            if index is int(one_question_set[5]):
+                correct_answer()
+            else:
+                game_over()
+        
+        index += 1
+    if skip_box.collidepoint(pos):
+        skip_question()
+    
+def correct_answer():
+    pass
+
+def skip_question():
+    pass
 
 read_question_file()
 one_question_set = read_next_question()
