@@ -14,7 +14,6 @@ question_count = 0
 question_index = 0
 file_name = "questions.txt"
 question_set = []
-score = 0
 
 #creating the rectangles
 marquee_box = Rect(0,0,870,80)
@@ -125,10 +124,30 @@ def on_mouse_down(pos):
         skip_question()
     
 def correct_answer():
-    pass
+    global score, time_left, question_set, one_question_set
+    
+    score += 1
+
+    if question_set:
+        #this if condition is checking if there is items in the list
+        one_question_set = read_next_question()
+        time_left = 10
+
+    else:
+        game_over()
+
 
 def skip_question():
-    pass
+    global time_left, one_question_set
+
+    if question_set and is_game_over == False:
+        one_question_set = read_next_question()
+        time_left = 10
+
+    else:
+        game_over()
+
+
 
 read_question_file()
 one_question_set = read_next_question()
